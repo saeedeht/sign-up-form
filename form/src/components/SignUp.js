@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from 'react';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { validate } from './validate';
+import { notify } from './toast';
 
 const SignUp = () => {
 
@@ -17,7 +20,6 @@ const SignUp = () => {
 
     useEffect(() => {
         setErrors(validate(data))
-        console.log(errors)
     },[data,touched]) 
 
     const changeHandler = event => {
@@ -32,9 +34,26 @@ const SignUp = () => {
         setTouched({...data, [event.target.name] : true })
     }
 
+    const submitHandler = event => {
+        event.preventDefault();
+        notify();
+        if (!Object.keys(errors).length) {
+            notify ('You signed in successfully' ,'success')
+        } else {
+            notify('Invalid data','error')
+            setTouched({
+                name:true,
+                email:true,
+                password:true,
+                confirmPassword:true,
+                isAccepted:true
+            })
+        }
+    }
+
     return (
         <div>
-            <form>
+            <form onSubmit={submitHandler}>
                 <h2>SignUp</h2>
                 <div>
                     <div>
@@ -63,11 +82,12 @@ const SignUp = () => {
                         {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span> }
                     </div>
                     <div>
-                        <a href="#">Login</a>
+                        <a href="/">Login</a>
                         <button type='submit' >Sign Up</button>
                     </div>
                 </div>
             </form>
+            <ToastContainer />
         </div>
     );
 };
