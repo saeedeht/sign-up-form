@@ -8,6 +8,7 @@ export const validate = data => {
         delete errors.name
     }
 
+
     if(!data.email) {
         errors.email = 'Eamil required'
     } else if (!/\s+@\s+\.\s+/.test(data.email)) {
@@ -18,7 +19,7 @@ export const validate = data => {
 
     if(!data.password) {
         errors.password = 'password required'
-    } else if (!data.password.length < 6) {
+    } else if (data.password.length < 6) {
         errors.password = 'Password needs to be 6 charactors or more.'
     } else {
         delete errors.password
