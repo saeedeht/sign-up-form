@@ -17,7 +17,7 @@ const Login = () => {
     const [touched, setTouched] = useState({});
 
     useEffect(() => {
-        setErrors(validate(data, "login"))
+        setErrors(validate(data, 'Login'))
     }, [data, touched])
 
     const changeHandler = event => {
@@ -31,9 +31,9 @@ const Login = () => {
     const submitHandler = event => {
         event.preventDefault();
         if (!Object.keys(errors).length) {
-            notify("You loged up successfully", "success")
+            notify('You loged in successfully', 'success')
         } else {
-            notify("Invalid data!", "error")
+            notify('Invalid data!', 'error')
             setTouched({
                 email: true,
                 password: true
@@ -67,7 +67,7 @@ const Login = () => {
                     {errors.password && touched.password && <span>{errors.password}</span>}
                 </div>
                 <div className={styles.formButtons}>
-                    <Link to="/signup">Sign Up</Link>
+                    <Link to="/Signup">Sign Up</Link>
                     <button type="submit">Login</button>
                 </div>
             </form>
