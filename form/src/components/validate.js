@@ -8,13 +8,12 @@ export const validate = data => {
         delete errors.name
     }
 
-
-    if(!data.email) {
-        errors.email = 'Eamil required'
-    } else if (!/\s+@\s+\.\s+/.test(data.email)) {
-        errors.email = 'Email address is invalid.'
+    if (!data.email) {
+        errors.email = "Email required"
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+        errors.email = "Email address is invalid"
     } else {
-        delete errors.email 
+        delete errors.email
     }
 
     if(!data.password) {
